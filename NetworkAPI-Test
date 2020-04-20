@@ -1,0 +1,23 @@
+
+import requests
+import json
+from pprint import pprint
+
+#open json file with host ip adresss
+#y = open("hosts.json", "r")
+#hosts = json.loads(y)
+
+proxies = {'http': None, 'https': None}
+params = {'userName': 'moxyit.admin', 'password': 'taut0@ccess'}
+hosts = {"ip": "10.17.119.141", "ip2": "10.17.119.142"}
+headers = {
+  'Content-Type': 'application/json'
+}
+ip_list = (hosts.values())
+print (ip_list)
+
+for x in ip_list:
+    u = "https://{}:443/rest/v1/login-sessions".format(x)
+    print (u)
+    r  = requests.post(u, proxies=proxies, headers=headers, verify=False, data=json.dumps(params))
+    print (r.text)
