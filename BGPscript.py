@@ -15,7 +15,7 @@ def ChechHostAVail():
      response = os.system("ping -c 1 " + i)
      if response == 0 :
         print ("Host exist, calling function config " )
-        cisco = dict(device_type="cisco_ios", host=i,username="dev", password="999999999")
+        cisco = dict(device_type="cisco_ios", host=i,username="dev", password="")
         net_connect = ConnectHandler(**cisco)
         net_connect.find_prompt()
      elif response == 1:
