@@ -1,8 +1,7 @@
-
 """This code can be used with aruba switches with SSH configured 
-to find the all the connected devices,to the Core Backbone Switch.
+to find the all the connected devices,to the Core Backbone L3 Switchs.
 You will need to provide a JSON file with the device ip adress you're
-trying to MAP. I have used it to find devices connected to the core switch
+trying to MAP. I have used it to find devices connected to backbone Network
 to MAP it out in our ZABBIX Monitoring system"""
 
 from netmiko import ConnectHandler
