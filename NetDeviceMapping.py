@@ -15,6 +15,7 @@ with open("credentials.json", "rt") as u:
 	credentials = json.loads(u.read())
 		
 """Credentials to Login to the switch"""
+
 hp_switch = {
     'device_type': '{}'.format(credentials["device_type"]),
     'host':'{}'.format(credentials["host"]),
@@ -25,7 +26,9 @@ hp_switch = {
 net_connect = ConnectHandler(**hp_switch)
 net_connect.find_prompt()
 #output = net_connect.send_command('sh lldp info remote-device 1-48 | include Address')
+
 """Reads the JSON file with IP adresses of the devices to find"""
+
 with open("LesoleilSwitchs.json", "r") as ip:
 	x=ip.read()
 	ip_list = json.loads(x)
@@ -34,8 +37,10 @@ final_Ip_list = (ip_list["ip"])
 #print (final_Ip_list[1])
 
 x = open("Arp_info.txt", "a")
+
 """Find the Availbility of the network device, if available
 add it to the DICT with True value else add it with False"""
+
 switchAvailabilityResult = {}
 for ip in final_Ip_list:				
 	output = net_connect.send_command ('ping {}'.format(ip))
@@ -52,7 +57,9 @@ for ip in final_Ip_list:
 		x.write(Arp_Output)
 		x.write("\n")
 x.close()
+
 """Regular expression pattern to find the port numbers from the Arp_Output FIle"""
+
 pattern = re.compile("\d+\s\s$")
 port_numbers = []
 
@@ -65,6 +72,7 @@ with open("Arp_info.txt", "rt") as parse:
                         port_numbers.append(y.group())
 
 """Finally display the result"""
+
 i=0
 for ip in final_Ip_list:
 	if switchAvailabilityResult[ip]=="True":
